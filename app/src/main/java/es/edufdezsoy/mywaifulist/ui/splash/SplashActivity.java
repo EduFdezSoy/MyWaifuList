@@ -1,13 +1,15 @@
-package es.edufdezsoy.mywaifulist;
+package es.edufdezsoy.mywaifulist.ui.splash;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import es.edufdezsoy.mywaifulist.R;
+
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
     }
 }
