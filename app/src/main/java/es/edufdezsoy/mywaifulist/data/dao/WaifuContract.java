@@ -12,9 +12,14 @@ public final class WaifuContract {
 
     public static final class WaifuEntry implements BaseColumns {
         public static final String TABLE_NAME = "waifu";
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_SURNAME = "surname";
+        public static final String COLUMN_NICKNAME = "nickname";
+        public static final String COLUMN_BIRTHDAY = "birthday";
 
+        public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE_NAME +
+                " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT)";
         public static final String SQL_DELETE_ENTRIES = "CREATE TABLE " + TABLE_NAME +
                 " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT)";
-        public static final String SQL_CREATE_ENTRIES = "";
     }
 }
