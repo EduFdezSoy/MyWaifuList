@@ -3,6 +3,7 @@ package es.edufdezsoy.mywaifulist.data.dao;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import es.edufdezsoy.mywaifulist.WaifuApplication;
 
@@ -23,6 +24,7 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i(WaifuApplication.TAG, "Creating database (WaifuOpenHelper:onCreate)");
         db.beginTransaction();
         try {
             db.execSQL(WaifuContract.AnimeEntry.SQL_CREATE_ENTRIES);
@@ -39,6 +41,7 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.i(WaifuApplication.TAG, "Upgrading database (WaifuOpenHelper:onUpgrade)");
         db.beginTransaction();
         try {
             db.execSQL(WaifuContract.WaifuEntry.SQL_DELETE_ENTRIES);
@@ -53,12 +56,14 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
     }
 
     public SQLiteDatabase openDatabase() {
+        Log.v(WaifuApplication.TAG, "Opening database (WaifuOpenHelper:openDatabase)");
         if (sqLiteDatabase == null)
             sqLiteDatabase = getWritableDatabase();
         return sqLiteDatabase;
     }
 
     public void closeDatabase() {
+        Log.v(WaifuApplication.TAG, "Closing database (WaifuOpenHelper:closeDatabase)");
         sqLiteDatabase.close();
     }
 }

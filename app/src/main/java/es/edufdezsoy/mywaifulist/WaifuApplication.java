@@ -6,6 +6,7 @@ import android.content.Context;
 import es.edufdezsoy.mywaifulist.data.dao.WaifuOpenHelper;
 
 public class WaifuApplication extends Application {
+    public static final String TAG = "EDUFDEZSOY";
     private static Context context;
 
     @Override
