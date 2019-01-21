@@ -14,6 +14,7 @@ public class WaifuApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         WaifuOpenHelper.getInstance().openDatabase();
+        WaifuOpenHelper.getInstance().closeDatabase();
     }
 
     public static Context getContext() {
