@@ -39,7 +39,7 @@ public final class WaifuContract {
                 COLUMN_IMAGE + " TEXT NOT NULL, " +
                 COLUMN_MYANIMELIST_URL + " TEXT NOT NULL)";
         // DELETE TABLE
-        public static final String SQL_DELETE_ENTRIES = "DROP DATABASE IF EXISTS " + TABLE_NAME;
+        public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + TABLE_NAME;
         // INSERT TEST DATA
         public static final String SQL_INSERT_ENTRIES = "INSERT INTO " + TABLE_NAME + " (" +
                 COLUMN_TITLE + ", " +
