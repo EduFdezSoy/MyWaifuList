@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 public final class WaifuContract {
 
     public static final String DATABASE_NAME = "MyWaifuList.db";
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 1;
 
     public static final class AnimeEntry implements BaseColumns {
         // TABLE NAME
