@@ -1,16 +1,14 @@
 package es.edufdezsoy.mywaifulist.data.dao;
 
-import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.Nullable;
 
 import es.edufdezsoy.mywaifulist.WaifuApplication;
 
 public class WaifuOpenHelper extends SQLiteOpenHelper {
     private static WaifuOpenHelper waifuOpenHelper;
-    private static SQLiteDatabase sqLiteDatabase;
+    private SQLiteDatabase sqLiteDatabase;
 
     private WaifuOpenHelper() {
         super(WaifuApplication.getContext(), WaifuContract.DATABASE_NAME, null, WaifuContract.DATABASE_VERSION);
@@ -27,10 +25,13 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.beginTransaction();
         try {
+            db.execSQL(WaifuContract.AnimeEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(WaifuContract.AnimeEntry.SQL_INSERT_ENTRIES);
             db.execSQL(WaifuContract.WaifuEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(WaifuContract.WaifuEntry.SQL_INSERT_ENTRIES);
             db.setTransactionSuccessful();
         } catch (SQLException e) {
-
+            e.printStackTrace();
         } finally {
             db.endTransaction();
         }
@@ -41,10 +42,11 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             db.execSQL(WaifuContract.WaifuEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(WaifuContract.AnimeEntry.SQL_DELETE_ENTRIES);
             onCreate(db);
             db.setTransactionSuccessful();
         } catch (SQLException e) {
-
+            e.printStackTrace();
         } finally {
             db.endTransaction();
         }
