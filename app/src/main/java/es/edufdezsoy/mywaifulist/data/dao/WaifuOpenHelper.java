@@ -66,4 +66,16 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
         Log.v(WaifuApplication.TAG, "Closing database (WaifuOpenHelper:closeDatabase)");
         sqLiteDatabase.close();
     }
+
+    /**
+     * this method is a callback whenever the database is opened, if its for write we would like to
+     * activate the foreign keys.
+     * @param db SQLiteDatabase
+     */
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly())
+            db.execSQL("PRAGMA foreign_keys=ON");
+    }
 }
