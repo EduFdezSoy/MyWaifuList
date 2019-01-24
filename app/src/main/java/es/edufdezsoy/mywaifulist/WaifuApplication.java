@@ -6,15 +6,13 @@ import android.content.Context;
 import es.edufdezsoy.mywaifulist.data.dao.WaifuOpenHelper;
 
 public class WaifuApplication extends Application {
-    public static final String TAG = "EDUFDEZSOY";
+    public static final String TAG = "EDUFDEZSOY"; // for debug propouses
     private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        WaifuOpenHelper.getInstance().openDatabase();
-        WaifuOpenHelper.getInstance().closeDatabase();
     }
 
     public static Context getContext() {

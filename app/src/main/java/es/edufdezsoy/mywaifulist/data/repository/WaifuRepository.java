@@ -2,6 +2,7 @@ package es.edufdezsoy.mywaifulist.data.repository;
 
 import java.util.ArrayList;
 
+import es.edufdezsoy.mywaifulist.data.dao.WaifuDao;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
 
 /**
@@ -9,10 +10,13 @@ import es.edufdezsoy.mywaifulist.data.model.Waifu;
  */
 public class WaifuRepository {
     private ArrayList<Waifu> waifus;
+    private int page;
     private static WaifuRepository waifuRepository;
+    private WaifuDao dao;
 
     private WaifuRepository() {
         waifus = new ArrayList<>();
+        dao = new WaifuDao();
     }
 
     public static WaifuRepository getInstance() {
@@ -23,7 +27,7 @@ public class WaifuRepository {
     }
 
     public void add(Waifu waifu) {
-        waifus.add(waifu);
+        dao.add(waifu);
     }
 
     public void remove(Waifu waifu) {
@@ -39,6 +43,6 @@ public class WaifuRepository {
     }
 
     public ArrayList<Waifu> getAll() {
-        return waifus;
+        return dao.getAll();
     }
 }
