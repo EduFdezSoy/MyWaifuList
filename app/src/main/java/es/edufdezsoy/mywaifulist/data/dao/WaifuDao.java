@@ -30,7 +30,7 @@ public class WaifuDao {
                             cursor.getString(cursor.getColumnIndex(WaifuContract.WaifuEntry.COLUMN_SURNAME)),
                             cursor.getString(cursor.getColumnIndex(WaifuContract.WaifuEntry.COLUMN_NICKNAME)),
                             dateFormat.parse(cursor.getString(cursor.getColumnIndex(WaifuContract.WaifuEntry.COLUMN_BIRTHDAY)))
-                            );
+                    );
                     list.add(waifu);
                 } catch (ParseException e) {
                     Log.e(WaifuApplication.TAG, "Error parsing date in WaifuDao:getAll");

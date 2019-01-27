@@ -7,11 +7,50 @@ public class Waifu {
     String surname;
     String nickname;
     Date birthday;
+    Anime anime;
 
+    /**
+     * legacy constructor
+     *
+     * @param name
+     * @param surname
+     * @param nickname
+     * @param birthday
+     */
     public Waifu(String name, String surname, String nickname, Date birthday) {
         this.name = name;
         this.surname = surname;
         this.nickname = nickname;
+        this.birthday = birthday;
+        this.anime = new Anime("-Legacy Constructor used-", 1, "", "", "", "");
+    }
+
+    /**
+     * @param name
+     * @param surname
+     * @param nickname
+     * @param anime
+     * @param birthday
+     */
+    public Waifu(String name, String surname, String nickname, Anime anime, Date birthday) {
+        this.name = name;
+        this.surname = surname;
+        this.nickname = nickname;
+        this.anime = anime;
+        this.birthday = birthday;
+    }
+
+    /**
+     * @param name
+     * @param surname
+     * @param anime
+     * @param birthday
+     */
+    public Waifu(String name, String surname, Anime anime, Date birthday) {
+        this.name = name;
+        this.surname = surname;
+        this.nickname = "";
+        this.anime = anime;
         this.birthday = birthday;
     }
 
@@ -46,4 +85,13 @@ public class Waifu {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
+    public Anime getAnime() {
+        return anime;
+    }
+
+    public void setAnime(Anime anime) {
+        this.anime = anime;
+    }
+
 }
