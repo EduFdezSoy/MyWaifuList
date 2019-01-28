@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import es.edufdezsoy.mywaifulist.R;
 import es.edufdezsoy.mywaifulist.adapter.WaifuAdapter;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
+import es.edufdezsoy.mywaifulist.ui.AnimeList.AnimeListActivity;
 import es.edufdezsoy.mywaifulist.ui.form.FormActivity;
 
 public class ListActivity extends AppCompatActivity implements ListContract.View {
@@ -34,6 +35,18 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
         adapter.setOnClickListener(v -> onEditClick(v));
         recyclerView.setAdapter(adapter);
         presenter.loadList();
+
+        adapter.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ListActivity.this.goToAnimeList();
+                return true;
+            }
+        });
+    }
+
+    private void goToAnimeList(){
+        startActivity(new Intent(this, AnimeListActivity.class));
     }
 
     @Override

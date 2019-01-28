@@ -10,6 +10,9 @@ public final class WaifuContract {
     public static final String DATABASE_NAME = "MyWaifuList.db";
     public static final int DATABASE_VERSION = 1;
 
+    /**
+     * Anime table data
+     */
     public static final class AnimeEntry implements BaseColumns {
         // TABLE NAME
         public static final String TABLE_NAME = "anime";
@@ -20,6 +23,7 @@ public final class WaifuContract {
         public static final String COLUMN_SEASON = "season";
         public static final String COLUMN_IMAGE = "image";
         public static final String COLUMN_MYANIMELIST_URL = "myanimelist";
+        public static final String COLUMN_TYPE = "type";
 
         // DEFAULT ORDER
         public static final String DEFAULT_SORT = "title";
@@ -27,7 +31,7 @@ public final class WaifuContract {
         public static final String[] ALL_COLUMNS = new String[]{
                 BaseColumns._ID, COLUMN_TITLE, COLUMN_ROMANJI_TITLE,
                 COLUMN_YEAR, COLUMN_SEASON, COLUMN_IMAGE,
-                COLUMN_MYANIMELIST_URL};
+                COLUMN_MYANIMELIST_URL, COLUMN_TYPE};
 
         // CREATE TABLE
         public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE_NAME +
@@ -37,7 +41,8 @@ public final class WaifuContract {
                 COLUMN_YEAR + " INTEGER NOT NULL, " +
                 COLUMN_SEASON + " TEXT NOT NULL, " +
                 COLUMN_IMAGE + " TEXT NOT NULL, " +
-                COLUMN_MYANIMELIST_URL + " TEXT NOT NULL)";
+                COLUMN_MYANIMELIST_URL + " TEXT NOT NULL, " +
+                COLUMN_TYPE + " TEXT NOT NULL)";
         // DELETE TABLE
         public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + TABLE_NAME;
         // INSERT TEST DATA
@@ -47,14 +52,16 @@ public final class WaifuContract {
                 COLUMN_YEAR + ", " +
                 COLUMN_SEASON + ", " +
                 COLUMN_IMAGE + ", " +
-                COLUMN_MYANIMELIST_URL +
+                COLUMN_MYANIMELIST_URL + ", " +
+                COLUMN_TYPE +
                 ") VALUES (" +
                 "'" + "Darling in the FranXX" + "', " +
                 "'" + "" + "', " +
                 "'" + 2018 + "', " +
                 "'" + "Winter" + "', " +
                 "'" + "darlinginthefranxx" + "', " +
-                "'" + "https://myanimelist.net/anime/35849/Darling_in_the_FranXX" + "'" +
+                "'" + "https://myanimelist.net/anime/35849/Darling_in_the_FranXX" + "', " +
+                "'" + "Anime" + "'" +
                 ")" +
                 ", (" +
                 "'" + "Rascal Does Not Dream of Bunny Girl Senpai" + "', " +
@@ -62,7 +69,8 @@ public final class WaifuContract {
                 "'" + 2018 + "', " +
                 "'" + "Fall" + "', " +
                 "'" + "seishunbutayarou" + "', " +
-                "'" + "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai" + "'" +
+                "'" + "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai" + "', " +
+                "'" + "Anime" + "'" +
                 ")" +
                 ", (" +
                 "'" + "A Silent Voice" + "', " +
@@ -70,10 +78,23 @@ public final class WaifuContract {
                 "'" + 2016 + "', " +
                 "'" + "" + "', " +
                 "'" + "koenokatachi" + "', " +
-                "'" + "https://myanimelist.net/anime/28851/Koe_no_Katachi" + "'" +
+                "'" + "https://myanimelist.net/anime/28851/Koe_no_Katachi" + "', " +
+                "'" + "Film" + "'" +
+                ")" +
+                ", (" +
+                "'" + "Komi-san wa, Comyushou desu." + "', " +
+                "'" + "" + "', " +
+                "'" + 2016 + "', " +
+                "'" + "" + "', " +
+                "'" + "komisan" + "', " +
+                "'" + "https://myanimelist.net/manga/99007/Komi-san_wa_Comyushou_desu" + "', " +
+                "'" + "Manga" + "'" +
                 ")";
     }
 
+    /**
+     * Waifu table data
+     */
     public static final class WaifuEntry implements BaseColumns {
         // TABLE NAME
         public static final String TABLE_NAME = "waifu";

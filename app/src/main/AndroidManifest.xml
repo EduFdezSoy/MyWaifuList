@@ -10,9 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.AnimeList.AnimeListActivity" />
         <activity android:name=".ui.form.FormActivity" />
         <activity android:name=".ui.list.ListActivity" />
-        <activity android:name=".ui.splash.SplashActivity" android:theme="@style/SplshTheme">
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/SplshTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
