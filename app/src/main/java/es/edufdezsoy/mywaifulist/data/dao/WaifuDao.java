@@ -3,6 +3,7 @@ package es.edufdezsoy.mywaifulist.data.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import es.edufdezsoy.mywaifulist.MyWaifuListApplication;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
+import es.edufdezsoy.mywaifulist.data.model.WaifuView;
 
 public class WaifuDao {
     public ArrayList<Waifu> getAll() {
@@ -74,5 +76,34 @@ public class WaifuDao {
         // TODO: to finish
 
         MyWaifuListOpenHelper.getInstance().closeDatabase();
+    }
+
+    public WaifuView view(int i) {
+        SQLiteDatabase sqLiteDatabase = MyWaifuListOpenHelper.getInstance().openDatabase();
+
+        WaifuView waifu = null;
+        SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
+        sqLiteQueryBuilder.setTables(MyWaifuListContract.WaifuInnerEntry.WAIFU_INNER_ANIME);
+        sqLiteQueryBuilder.setProjectionMap(MyWaifuListContract.WaifuInnerEntry.sWaifuInnerProjectionMap);
+
+        Cursor cursor = sqLiteQueryBuilder.query(sqLiteDatabase, MyWaifuListContract.WaifuInnerEntry.ALL_COLUMNS,
+                null, null, null, null, MyWaifuListContract.WaifuInnerEntry.DEFAULT_SORT);
+        if (cursor.moveToFirst()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                waifu = new WaifuView(
+                        cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuEntry.COLUMN_NAME)),
+                        cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuEntry.COLUMN_SURNAME)),
+                        cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuEntry.COLUMN_NICKNAME)),
+                        dateFormat.parse(cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuEntry.COLUMN_BIRTHDAY)))
+                );
+            } catch (ParseException e) {
+                Log.e(MyWaifuListApplication.TAG, "Error parsing date in WaifuDao:getAll");
+                e.printStackTrace();
+            }
+        }
+        MyWaifuListOpenHelper.getInstance().closeDatabase();
+
+        return waifu;
     }
 }

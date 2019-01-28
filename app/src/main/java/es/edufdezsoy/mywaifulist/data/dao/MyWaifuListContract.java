@@ -2,6 +2,8 @@ package es.edufdezsoy.mywaifulist.data.dao;
 
 import android.provider.BaseColumns;
 
+import java.util.HashMap;
+
 /**
  * This class will only contain constants to define the database, tables, columns and the test data
  */
@@ -26,7 +28,7 @@ public final class MyWaifuListContract {
         public static final String COLUMN_TYPE = "type";
 
         // DEFAULT ORDER
-        public static final String DEFAULT_SORT = "title";
+        public static final String DEFAULT_SORT = COLUMN_TITLE;
         // COLUMNS ARRAY
         public static final String[] ALL_COLUMNS = new String[]{
                 BaseColumns._ID, COLUMN_TITLE, COLUMN_ROMANJI_TITLE,
@@ -107,7 +109,7 @@ public final class MyWaifuListContract {
         // FK COLUMNS
         public static final String COLUMN_ANIME_ID = "anime_id";
         // DEFAULT ORDER
-        public static final String DEFAULT_SORT = "name";
+        public static final String DEFAULT_SORT = COLUMN_NAME;
         // COLUMNS ARRAY
         public static final String[] ALL_COLUMNS = new String[]{
                 BaseColumns._ID, COLUMN_NAME, COLUMN_SURNAME,
@@ -163,5 +165,45 @@ public final class MyWaifuListContract {
                 "'" + "nishimiyashouko" + "', " +
                 "" + 3 + "" +
                 ")";
+    }
+
+    /**
+     * Class for inner join selects
+     */
+    public static final class WaifuInnerEntry implements BaseColumns {
+        // TABLE NAME
+        public static final String TABLE_NAME = WaifuEntry.TABLE_NAME;
+        // COLUMNS
+        public static final String COLUMN_NAME = WaifuEntry.COLUMN_NAME;
+        public static final String COLUMN_SURNAME = WaifuEntry.COLUMN_SURNAME;
+        public static final String COLUMN_NICKNAME = WaifuEntry.COLUMN_NICKNAME;
+        public static final String COLUMN_BIRTHDAY = WaifuEntry.COLUMN_BIRTHDAY;
+        public static final String COLUMN_IMAGE = WaifuEntry.COLUMN_IMAGE;
+        // FK COLUMNS
+        public static final String COLUMN_ANIME_ID = WaifuEntry.COLUMN_ANIME_ID;
+        public static final String COLUMN_ANIME_TITLE = AnimeEntry.COLUMN_TITLE;
+        // DEFAULT ORDER
+        public static final String DEFAULT_SORT = COLUMN_NAME;
+        // COLUMNS ARRAY
+        public static final String[] ALL_COLUMNS = new String[]{
+                BaseColumns._ID, COLUMN_NAME, COLUMN_SURNAME,
+                COLUMN_NICKNAME, COLUMN_BIRTHDAY, COLUMN_IMAGE,
+                COLUMN_ANIME_ID, COLUMN_ANIME_TITLE};
+
+        public static final String WAIFU_INNER_ANIME = TABLE_NAME + " INNER JOIN " +
+                AnimeEntry.TABLE_NAME + " ON " +
+                COLUMN_ANIME_ID + "=" + AnimeEntry._ID;
+
+        // PROJECTION MAP from the columns of the db to a cursor
+        public static HashMap<String, String> sWaifuInnerProjectionMap = new HashMap<>();
+        static {
+            sWaifuInnerProjectionMap.put(_ID, TABLE_NAME + "." + _ID);
+            sWaifuInnerProjectionMap.put(COLUMN_NAME, TABLE_NAME + "." + COLUMN_NAME);
+            sWaifuInnerProjectionMap.put(COLUMN_SURNAME, TABLE_NAME + "." + COLUMN_SURNAME);
+            sWaifuInnerProjectionMap.put(COLUMN_NICKNAME, TABLE_NAME + "." + COLUMN_NICKNAME);
+            sWaifuInnerProjectionMap.put(COLUMN_BIRTHDAY, TABLE_NAME + "." + COLUMN_BIRTHDAY);
+            sWaifuInnerProjectionMap.put(COLUMN_ANIME_ID, AnimeEntry.TABLE_NAME + "." + AnimeEntry._ID);
+            sWaifuInnerProjectionMap.put(COLUMN_ANIME_TITLE, AnimeEntry.TABLE_NAME + "." + COLUMN_ANIME_TITLE);
+        }
     }
 }

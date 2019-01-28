@@ -3,6 +3,7 @@ package es.edufdezsoy.mywaifulist.data.model;
 import java.io.Serializable;
 
 public class Anime implements Serializable {
+    private int id;
     private String title;
     private String romanji;
     private int year;
@@ -33,6 +34,29 @@ public class Anime implements Serializable {
     }
 
     /**
+     * Use this constructor if the title and the romanji are not the same
+     *
+     * @param id             id in the database
+     * @param title          title of that anime
+     * @param romanji        title as-readed from japanese
+     * @param year           aired at
+     * @param season         premier season
+     * @param image          url to a image
+     * @param myAnimeListURL url to myanimelist.net
+     * @param type           anime/manga/film
+     */
+    public Anime(int id, String title, String romanji, int year, String season, String image, String myAnimeListURL, String type) {
+        this.id = id;
+        this.title = title;
+        this.romanji = romanji;
+        this.year = year;
+        this.season = season;
+        this.image = image;
+        this.myAnimeListURL = myAnimeListURL;
+        this.type = type;
+    }
+
+    /**
      * Use this constructor if the title and the romanji title are the same
      *
      * @param title          title of the anime, same as romanji
@@ -50,6 +74,47 @@ public class Anime implements Serializable {
         this.image = image;
         this.myAnimeListURL = myAnimeListURL;
         this.type = type;
+    }
+
+    /**
+     * Use this constructor if the title and the romanji title are the same
+     *
+     * @param id             id in the database
+     * @param title          title of the anime, same as romanji
+     * @param year           aired at
+     * @param season         premier season
+     * @param image          url to a image
+     * @param myAnimeListURL url to myanimelist.net
+     * @param type           anime/manga/film
+     */
+    public Anime(int id, String title, int year, String season, String image, String myAnimeListURL, String type) {
+        this.id = id;
+        this.title = title;
+        this.romanji = title;
+        this.year = year;
+        this.season = season;
+        this.image = image;
+        this.myAnimeListURL = myAnimeListURL;
+        this.type = type;
+    }
+
+    /**
+     * Simplest constructor
+     *
+     * @param id             id in the database
+     * @param title          title of that anime
+     */
+    public Anime(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
