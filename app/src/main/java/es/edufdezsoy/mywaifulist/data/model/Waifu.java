@@ -1,8 +1,10 @@
 package es.edufdezsoy.mywaifulist.data.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Waifu {
+public class Waifu implements Serializable {
+    public static final String TAG = "WAIFU";
     String name;
     String surname;
     String nickname;

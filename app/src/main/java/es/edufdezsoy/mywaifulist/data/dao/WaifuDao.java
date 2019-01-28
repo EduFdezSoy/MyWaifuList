@@ -56,4 +56,23 @@ public class WaifuDao {
 
         WaifuOpenHelper.getInstance().closeDatabase();
     }
+
+    public void remove(Waifu waifu) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SQLiteDatabase sqLiteDatabase = WaifuOpenHelper.getInstance().openDatabase();
+
+        // TODO: to finish
+        // sqLiteDatabase.delete()
+
+        WaifuOpenHelper.getInstance().closeDatabase();
+    }
+
+    public void edit(Waifu oldWaifu, Waifu newWaifu) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SQLiteDatabase sqLiteDatabase = WaifuOpenHelper.getInstance().openDatabase();
+
+        // TODO: to finish
+
+        WaifuOpenHelper.getInstance().closeDatabase();
+    }
 }
