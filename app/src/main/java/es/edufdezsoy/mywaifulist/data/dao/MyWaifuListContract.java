@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 /**
  * This class will only contain constants to define the database, tables, columns and the test data
  */
-public final class WaifuContract {
+public final class MyWaifuListContract {
 
     public static final String DATABASE_NAME = "MyWaifuList.db";
     public static final int DATABASE_VERSION = 1;

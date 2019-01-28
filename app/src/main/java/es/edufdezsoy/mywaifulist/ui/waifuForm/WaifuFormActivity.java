@@ -1,4 +1,4 @@
-package es.edufdezsoy.mywaifulist.ui.form;
+package es.edufdezsoy.mywaifulist.ui.waifuForm;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,16 +16,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import es.edufdezsoy.mywaifulist.R;
-import es.edufdezsoy.mywaifulist.WaifuApplication;
+import es.edufdezsoy.mywaifulist.MyWaifuListApplication;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
-import es.edufdezsoy.mywaifulist.ui.list.ListActivity;
+import es.edufdezsoy.mywaifulist.ui.waifuList.WaifuListActivity;
 
-public class FormActivity extends AppCompatActivity implements FormContract.View {
+public class WaifuFormActivity extends AppCompatActivity implements WaifuFormContract.View {
     private ImageView image;
     private TextInputEditText name, surname, nickname, birthday;
     private Button addButton;
     private Waifu originalWaifu;
-    private FormContract.Presenter presenter;
+    private WaifuFormContract.Presenter presenter;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     @Override
@@ -33,7 +33,7 @@ public class FormActivity extends AppCompatActivity implements FormContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-        presenter = new FormPresenter(this);
+        presenter = new WaifuFormPresenter(this);
 
         addButton = findViewById(R.id.buttonAdd);
         addButton.setOnClickListener(v -> onAddButtonClick());
@@ -76,7 +76,7 @@ public class FormActivity extends AppCompatActivity implements FormContract.View
 
     @Override
     public void onSucess() {
-        Intent intent = new Intent(this, ListActivity.class);
+        Intent intent = new Intent(this, WaifuListActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         buildNotification(getString(R.string.app_name), "Your Waifu was added!", pendingIntent);
     }
@@ -91,7 +91,7 @@ public class FormActivity extends AppCompatActivity implements FormContract.View
      */
     public void buildNotification(String title, String text, PendingIntent intent) {
         // see for help: https://developer.android.com/training/notify-user/build-notification
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, WaifuApplication.NOTIFICATION_CHANNEL_ID)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, MyWaifuListApplication.NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_waifu)
                 .setContentTitle(title)
                 .setContentText(text)

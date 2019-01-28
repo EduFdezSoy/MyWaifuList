@@ -7,10 +7,10 @@ import android.util.Log;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import es.edufdezsoy.mywaifulist.WaifuApplication;
+import es.edufdezsoy.mywaifulist.MyWaifuListApplication;
 
-public class WaifuOpenHelper extends SQLiteOpenHelper {
-    private static WaifuOpenHelper waifuOpenHelper;
+public class MyWaifuListOpenHelper extends SQLiteOpenHelper {
+    private static MyWaifuListOpenHelper waifuOpenHelper;
     private SQLiteDatabase sqLiteDatabase;
     /**
      * openCounter will count how many clases are using the database.
@@ -19,26 +19,26 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
      */
     private AtomicInteger openCounter = new AtomicInteger();
 
-    private WaifuOpenHelper() {
-        super(WaifuApplication.getContext(), WaifuContract.DATABASE_NAME, null, WaifuContract.DATABASE_VERSION);
+    private MyWaifuListOpenHelper() {
+        super(MyWaifuListApplication.getContext(), MyWaifuListContract.DATABASE_NAME, null, MyWaifuListContract.DATABASE_VERSION);
     }
 
-    public static WaifuOpenHelper getInstance() {
+    public static MyWaifuListOpenHelper getInstance() {
         if (waifuOpenHelper == null)
-            waifuOpenHelper = new WaifuOpenHelper();
+            waifuOpenHelper = new MyWaifuListOpenHelper();
 
         return waifuOpenHelper;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i(WaifuApplication.TAG, "Creating database (WaifuOpenHelper:onCreate)");
+        Log.i(MyWaifuListApplication.TAG, "Creating database (MyWaifuListOpenHelper:onCreate)");
         db.beginTransaction();
         try {
-            db.execSQL(WaifuContract.AnimeEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(WaifuContract.AnimeEntry.SQL_INSERT_ENTRIES);
-            db.execSQL(WaifuContract.WaifuEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(WaifuContract.WaifuEntry.SQL_INSERT_ENTRIES);
+            db.execSQL(MyWaifuListContract.AnimeEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(MyWaifuListContract.AnimeEntry.SQL_INSERT_ENTRIES);
+            db.execSQL(MyWaifuListContract.WaifuEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(MyWaifuListContract.WaifuEntry.SQL_INSERT_ENTRIES);
             db.setTransactionSuccessful();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,11 +49,11 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i(WaifuApplication.TAG, "Upgrading database (WaifuOpenHelper:onUpgrade)");
+        Log.i(MyWaifuListApplication.TAG, "Upgrading database (MyWaifuListOpenHelper:onUpgrade)");
         db.beginTransaction();
         try {
-            db.execSQL(WaifuContract.WaifuEntry.SQL_DELETE_ENTRIES);
-            db.execSQL(WaifuContract.AnimeEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(MyWaifuListContract.WaifuEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(MyWaifuListContract.AnimeEntry.SQL_DELETE_ENTRIES);
             onCreate(db);
             db.setTransactionSuccessful();
         } catch (SQLException e) {
@@ -64,14 +64,14 @@ public class WaifuOpenHelper extends SQLiteOpenHelper {
     }
 
     public synchronized SQLiteDatabase openDatabase() {
-        Log.v(WaifuApplication.TAG, "Opening database (WaifuOpenHelper:openDatabase)");
+        Log.v(MyWaifuListApplication.TAG, "Opening database (MyWaifuListOpenHelper:openDatabase)");
         if (openCounter.incrementAndGet() == 1)
             sqLiteDatabase = getWritableDatabase();
         return sqLiteDatabase;
     }
 
     public synchronized void closeDatabase() {
-        Log.v(WaifuApplication.TAG, "Closing database (WaifuOpenHelper:closeDatabase)");
+        Log.v(MyWaifuListApplication.TAG, "Closing database (MyWaifuListOpenHelper:closeDatabase)");
         if (openCounter.decrementAndGet() == 0)
             sqLiteDatabase.close();
     }

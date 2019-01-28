@@ -1,11 +1,11 @@
-package es.edufdezsoy.mywaifulist.ui.list;
+package es.edufdezsoy.mywaifulist.ui.waifuList;
 
 import java.util.ArrayList;
 
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
 import es.edufdezsoy.mywaifulist.data.repository.WaifuRepository;
 
-public class ListInteractor {
+public class WaifuListInteractor {
     public interface InteractorListener {
         void onListLoaded(ArrayList<Waifu> waifus);
     }

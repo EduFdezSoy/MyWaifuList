@@ -1,11 +1,9 @@
-package es.edufdezsoy.mywaifulist.ui.AnimeList;
+package es.edufdezsoy.mywaifulist.ui.animeList;
 
 import java.util.ArrayList;
 
 import es.edufdezsoy.mywaifulist.data.model.Anime;
-import es.edufdezsoy.mywaifulist.data.model.Waifu;
 import es.edufdezsoy.mywaifulist.data.repository.AnimeRepository;
-import es.edufdezsoy.mywaifulist.data.repository.WaifuRepository;
 
 public class AnimeListInteractor {
     public interface InteractorListener {

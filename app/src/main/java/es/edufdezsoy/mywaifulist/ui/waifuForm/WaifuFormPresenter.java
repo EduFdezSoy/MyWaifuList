@@ -1,14 +1,14 @@
-package es.edufdezsoy.mywaifulist.ui.form;
+package es.edufdezsoy.mywaifulist.ui.waifuForm;
 
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
 
-public class FormPresenter implements FormContract.Presenter, FormInteractor.InteractorListener {
-    FormContract.View view;
-    FormInteractor interactor;
+public class WaifuFormPresenter implements WaifuFormContract.Presenter, WaifuFormInteractor.InteractorListener {
+    WaifuFormContract.View view;
+    WaifuFormInteractor interactor;
 
-    public FormPresenter(FormContract.View view) {
+    public WaifuFormPresenter(WaifuFormContract.View view) {
         this.view = view;
-        interactor = new FormInteractor();
+        interactor = new WaifuFormInteractor();
     }
 
     @Override

@@ -1,9 +1,9 @@
-package es.edufdezsoy.mywaifulist.ui.form;
+package es.edufdezsoy.mywaifulist.ui.waifuForm;
 
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
 import es.edufdezsoy.mywaifulist.data.repository.WaifuRepository;
 
-public class FormInteractor {
+public class WaifuFormInteractor {
     interface InteractorListener {
         void onSuccess();
         void onFailure();

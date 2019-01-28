@@ -1,4 +1,4 @@
-package es.edufdezsoy.mywaifulist.ui.list;
+package es.edufdezsoy.mywaifulist.ui.waifuList;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import es.edufdezsoy.mywaifulist.R;
 import es.edufdezsoy.mywaifulist.adapter.WaifuAdapter;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
-import es.edufdezsoy.mywaifulist.ui.AnimeList.AnimeListActivity;
-import es.edufdezsoy.mywaifulist.ui.form.FormActivity;
+import es.edufdezsoy.mywaifulist.ui.animeList.AnimeListActivity;
+import es.edufdezsoy.mywaifulist.ui.waifuForm.WaifuFormActivity;
 
-public class ListActivity extends AppCompatActivity implements ListContract.View {
-    private ListContract.Presenter presenter;
+public class WaifuListActivity extends AppCompatActivity implements WaifuListContract.View {
+    private WaifuListContract.Presenter presenter;
     private RecyclerView recyclerView;
     private FloatingActionButton addButton;
     private WaifuAdapter adapter;
@@ -26,7 +26,7 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        presenter = new ListPresenter(this);
+        presenter = new WaifuListPresenter(this);
         adapter = new WaifuAdapter(this);
         addButton = findViewById(R.id.floatingActionButton);
         addButton.setOnClickListener(v -> onAddButtonClick());
@@ -39,7 +39,7 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
         adapter.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ListActivity.this.goToAnimeList();
+                WaifuListActivity.this.goToAnimeList();
                 return true;
             }
         });
@@ -57,11 +57,11 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
     }
 
     private void onAddButtonClick() {
-        Intent intent = new Intent(this, FormActivity.class);
+        Intent intent = new Intent(this, WaifuFormActivity.class);
         startActivity(intent);
     }
     private void onEditClick(View v) {
-        Intent intent = new Intent(this, FormActivity.class);
+        Intent intent = new Intent(this, WaifuFormActivity.class);
         Waifu waifu = adapter.getItem(recyclerView.getChildAdapterPosition(v));
         intent.putExtra(Waifu.TAG, waifu);
         startActivity(intent);

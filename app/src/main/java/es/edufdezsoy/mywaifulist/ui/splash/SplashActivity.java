@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import es.edufdezsoy.mywaifulist.R;
-import es.edufdezsoy.mywaifulist.WaifuApplication;
-import es.edufdezsoy.mywaifulist.ui.list.ListActivity;
+import es.edufdezsoy.mywaifulist.MyWaifuListApplication;
+import es.edufdezsoy.mywaifulist.ui.waifuList.WaifuListActivity;
 
 public class SplashActivity extends AppCompatActivity implements SplashContract.View {
     SplashContract.Presenter presenter;
@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(WaifuApplication.NOTIFICATION_CHANNEL_ID, name, importance);
+            NotificationChannel channel = new NotificationChannel(MyWaifuListApplication.NOTIFICATION_CHANNEL_ID, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
@@ -59,6 +59,6 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
 
     @Override
     public void onWaifuListLoaded() {
-        startActivity(new Intent(this, ListActivity.class));
+        startActivity(new Intent(this, WaifuListActivity.class));
     }
 }

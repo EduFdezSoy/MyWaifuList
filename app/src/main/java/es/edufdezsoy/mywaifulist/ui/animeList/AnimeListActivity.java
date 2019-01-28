@@ -1,4 +1,4 @@
-package es.edufdezsoy.mywaifulist.ui.AnimeList;
+package es.edufdezsoy.mywaifulist.ui.animeList;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

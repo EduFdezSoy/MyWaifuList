@@ -1,6 +1,8 @@
 package es.edufdezsoy.mywaifulist.data.model;
 
-public class Anime {
+import java.io.Serializable;
+
+public class Anime implements Serializable {
     private String title;
     private String romanji;
     private int year;
@@ -33,7 +35,7 @@ public class Anime {
     /**
      * Use this constructor if the title and the romanji title are the same
      *
-     * @param title          same as romanji
+     * @param title          title of the anime, same as romanji
      * @param year           aired at
      * @param season         premier season
      * @param image          url to a image
