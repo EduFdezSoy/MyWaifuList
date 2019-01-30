@@ -15,6 +15,7 @@ import es.edufdezsoy.mywaifulist.adapter.WaifuAdapter;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
 import es.edufdezsoy.mywaifulist.ui.animeList.AnimeListActivity;
 import es.edufdezsoy.mywaifulist.ui.waifuForm.WaifuFormActivity;
+import es.edufdezsoy.mywaifulist.ui.waifuView.WaifuActivity;
 
 public class WaifuListActivity extends AppCompatActivity implements WaifuListContract.View {
     private WaifuListContract.Presenter presenter;
@@ -25,14 +26,14 @@ public class WaifuListActivity extends AppCompatActivity implements WaifuListCon
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_waifu_list);
         presenter = new WaifuListPresenter(this);
         adapter = new WaifuAdapter(this);
         addButton = findViewById(R.id.floatingActionButton);
         addButton.setOnClickListener(v -> onAddButtonClick());
         recyclerView = findViewById(R.id.recycler_waifu);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setOnClickListener(v -> onEditClick(v));
+        adapter.setOnClickListener(v -> seeWaifuClick(v));
         recyclerView.setAdapter(adapter);
         presenter.loadList();
 
@@ -62,6 +63,13 @@ public class WaifuListActivity extends AppCompatActivity implements WaifuListCon
     }
     private void onEditClick(View v) {
         Intent intent = new Intent(this, WaifuFormActivity.class);
+        Waifu waifu = adapter.getItem(recyclerView.getChildAdapterPosition(v));
+        intent.putExtra(Waifu.TAG, waifu);
+        startActivity(intent);
+    }
+
+    private void seeWaifuClick(View v) {
+        Intent intent = new Intent(this, WaifuActivity.class);
         Waifu waifu = adapter.getItem(recyclerView.getChildAdapterPosition(v));
         intent.putExtra(Waifu.TAG, waifu);
         startActivity(intent);

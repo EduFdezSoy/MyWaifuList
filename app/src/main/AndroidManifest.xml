@@ -13,6 +13,7 @@
         <activity android:name=".ui.animeList.AnimeListActivity" />
         <activity android:name=".ui.waifuForm.WaifuFormActivity" />
         <activity android:name=".ui.waifuList.WaifuListActivity" />
+        <activity android:name=".ui.waifuView.WaifuActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/SplshTheme">

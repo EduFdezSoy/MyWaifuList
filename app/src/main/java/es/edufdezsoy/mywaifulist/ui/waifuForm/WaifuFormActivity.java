@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -23,6 +24,7 @@ import es.edufdezsoy.mywaifulist.ui.waifuList.WaifuListActivity;
 public class WaifuFormActivity extends AppCompatActivity implements WaifuFormContract.View {
     private ImageView image;
     private TextInputEditText name, surname, nickname, birthday;
+    private Spinner anime;
     private Button addButton;
     private Waifu originalWaifu;
     private WaifuFormContract.Presenter presenter;
@@ -31,7 +33,7 @@ public class WaifuFormActivity extends AppCompatActivity implements WaifuFormCon
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
+        setContentView(R.layout.activity_waifu_form);
 
         presenter = new WaifuFormPresenter(this);
 
