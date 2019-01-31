@@ -33,7 +33,10 @@ public class WaifuListActivity extends AppCompatActivity implements WaifuListCon
         addButton.setOnClickListener(v -> onAddButtonClick());
         recyclerView = findViewById(R.id.recycler_waifu);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // adapter.setOnClickListener(v -> onEditClick(v));
         adapter.setOnClickListener(v -> seeWaifuClick(v));
+
         recyclerView.setAdapter(adapter);
         presenter.loadList();
 

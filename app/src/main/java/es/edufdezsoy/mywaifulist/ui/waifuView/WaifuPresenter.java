@@ -1,5 +1,7 @@
 package es.edufdezsoy.mywaifulist.ui.waifuView;
 
+import es.edufdezsoy.mywaifulist.data.model.Waifu;
+
 public class WaifuPresenter implements WaifuContract.Presenter, WaifuInteractor.InteractorListener {
     WaifuContract.View view;
     WaifuInteractor interactor;
@@ -10,12 +12,17 @@ public class WaifuPresenter implements WaifuContract.Presenter, WaifuInteractor.
     }
 
     @Override
-    public void onSuccess() {
-
+    public void loadWaifu(int id) {
+        interactor.getWaifu(id, this);
     }
 
     @Override
-    public void onFailure() {
+    public void loadWaifuByName(String name, String surname) {
+        interactor.getWaifu(0, this);
+    }
 
+    @Override
+    public void onSuccess(Waifu waifu) {
+        view.onWaifuLoaded(waifu);
     }
 }

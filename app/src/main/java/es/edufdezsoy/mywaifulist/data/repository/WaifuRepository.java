@@ -39,7 +39,12 @@ public class WaifuRepository {
     }
 
     public Waifu get(int i) {
-        return waifus.get(i);
+        return dao.get(i);
+    }
+
+    public Waifu get(String name, String surname) {
+        return dao.get(1);
+        // return dao.get(name, surname);
     }
 
     public ArrayList<Waifu> getAll() {

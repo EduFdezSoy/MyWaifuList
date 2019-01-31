@@ -1,35 +1,28 @@
 package es.edufdezsoy.mywaifulist.ui.waifuView;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-import es.edufdezsoy.mywaifulist.MyWaifuListApplication;
 import es.edufdezsoy.mywaifulist.R;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
-import es.edufdezsoy.mywaifulist.ui.waifuList.WaifuListActivity;
 
 public class WaifuActivity extends AppCompatActivity implements WaifuContract.View {
     private ImageView image;
     private TextView name, surname, nickname, birthday, anime;
-    private Waifu waifu;
+    private TextView nameTag, nicknameTag, birthdayTag, animeTag;
     private WaifuContract.Presenter presenter;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM", new Locale("es", "ES"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waifu_form);
+        setContentView(R.layout.activity_waifu_view);
 
         presenter = new WaifuPresenter(this);
 
@@ -40,14 +33,28 @@ public class WaifuActivity extends AppCompatActivity implements WaifuContract.Vi
         birthday = findViewById(R.id.textViewBirthday);
         anime = findViewById(R.id.textViewAnime);
 
-        if ((waifu = (Waifu) getIntent().getSerializableExtra(Waifu.TAG)) != null) {
-
-            name.setText(waifu.getName());
-            surname.setText(waifu.getSurname());
-            nickname.setText(waifu.getNickname());
-            birthday.setText(dateFormat.format(waifu.getBirthday()));
-        }
-
+        nameTag = findViewById(R.id.textViewNameNSurnameTag);
+        nicknameTag = findViewById(R.id.textViewAKATag);
+        birthdayTag = findViewById(R.id.textViewBirthdayTag);
+        animeTag = findViewById(R.id.textViewAnimeTag);
+        Waifu wa;
+        if ((wa = (Waifu) getIntent().getSerializableExtra(Waifu.TAG)) != null)
+            presenter.loadWaifuByName(wa.getName(), wa.getSurname());
         // TODO: add a menu with an edit option
+    }
+
+    @Override
+    public void onWaifuLoaded(Waifu waifu) {
+        name.setText(waifu.getName());
+        surname.setText(waifu.getSurname());
+        nickname.setText(waifu.getNickname());
+        birthday.setText(dateFormat.format(waifu.getBirthday()));
+        anime.setText(waifu.getAnime().getTitle());
+
+        if (nickname.getText().toString().isEmpty())
+        {
+            nicknameTag.setVisibility(View.GONE);
+            nickname.setVisibility(View.GONE);
+        }
     }
 }

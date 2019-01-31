@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import es.edufdezsoy.mywaifulist.MyWaifuListApplication;
+import es.edufdezsoy.mywaifulist.data.model.Anime;
 import es.edufdezsoy.mywaifulist.data.model.Waifu;
 import es.edufdezsoy.mywaifulist.data.model.WaifuView;
 
@@ -43,6 +44,46 @@ public class WaifuDao {
         cursor.close();
         MyWaifuListOpenHelper.getInstance().closeDatabase();
         return list;
+    }
+
+    public Waifu get(int id) {
+        Waifu waifu = null;
+        SQLiteDatabase sqLiteDatabase = MyWaifuListOpenHelper.getInstance().openDatabase();
+
+        SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
+        sqLiteQueryBuilder.setTables(MyWaifuListContract.WaifuInnerEntry.TABLE_NAME);
+        sqLiteQueryBuilder.setProjectionMap(MyWaifuListContract.WaifuInnerEntry.sWaifuInnerProjectionMap);
+
+        Cursor cursor = sqLiteQueryBuilder.query(
+                sqLiteDatabase,
+                MyWaifuListContract.WaifuInnerEntry.ALL_COLUMNS,
+                (MyWaifuListContract.WaifuInnerEntry._ID + " = " + id), null, null, null,
+                MyWaifuListContract.WaifuInnerEntry.DEFAULT_SORT);
+
+        if (cursor.moveToFirst()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            do {
+                try {
+                    waifu = new Waifu(
+                            cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_NAME)),
+                            cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_SURNAME)),
+                            cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_NICKNAME)),
+                            new Anime(
+                                    cursor.getInt(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_ANIME_ID)),
+                                    cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_ANIME_TITLE))
+                            ),
+                            dateFormat.parse(cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_BIRTHDAY)))
+                    );
+                } catch (ParseException e) {
+                    Log.e(MyWaifuListApplication.TAG, "Error parsing date in WaifuDao:get+ID=" + id);
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        MyWaifuListOpenHelper.getInstance().closeDatabase();
+        return waifu;
     }
 
     public void add(Waifu waifu) {

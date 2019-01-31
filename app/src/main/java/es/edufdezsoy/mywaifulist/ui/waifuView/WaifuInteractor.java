@@ -5,22 +5,15 @@ import es.edufdezsoy.mywaifulist.data.repository.WaifuRepository;
 
 public class WaifuInteractor {
     interface InteractorListener {
-        void onSuccess();
-        void onFailure();
+        void onSuccess(Waifu waifu);
     }
 
-    public void addWaifu(Waifu waifu, InteractorListener listener) {
-        // WaifuRepository.getInstance().add(waifu);
-        listener.onSuccess();
+    public void getWaifu(int waifuId, InteractorListener listener) {
+        listener.onSuccess(WaifuRepository.getInstance().get(waifuId));
     }
 
-    public void editWaifu(Waifu oldWaifu, Waifu newWaifu, InteractorListener listener) {
-        WaifuRepository.getInstance();
-        listener.onSuccess();
-    }
-
-    public void removeWaifu(Waifu waifu, InteractorListener listener) {
-        WaifuRepository.getInstance().remove(waifu);
-        listener.onSuccess();
+    public void getWaifuByName(String waifuName, InteractorListener listener) {
+        Waifu waifu = WaifuRepository.getInstance().get(1);
+        listener.onSuccess(waifu);
     }
 }
