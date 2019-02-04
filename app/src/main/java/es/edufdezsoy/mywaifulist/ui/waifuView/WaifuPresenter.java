@@ -18,7 +18,7 @@ public class WaifuPresenter implements WaifuContract.Presenter, WaifuInteractor.
 
     @Override
     public void loadWaifuByName(String name, String surname) {
-        interactor.getWaifu(0, this);
+        interactor.getWaifu(1, this);
     }
 
     @Override

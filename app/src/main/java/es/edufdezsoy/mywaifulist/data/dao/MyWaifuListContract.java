@@ -187,12 +187,15 @@ public final class MyWaifuListContract {
         // COLUMNS ARRAY
         public static final String[] ALL_COLUMNS = new String[]{
                 BaseColumns._ID, COLUMN_NAME, COLUMN_SURNAME,
-                COLUMN_NICKNAME, COLUMN_BIRTHDAY, COLUMN_IMAGE,
+                COLUMN_NICKNAME, COLUMN_BIRTHDAY,
                 COLUMN_ANIME_ID, COLUMN_ANIME_TITLE};
 
         public static final String WAIFU_INNER_ANIME = TABLE_NAME + " INNER JOIN " +
                 AnimeEntry.TABLE_NAME + " ON " +
-                COLUMN_ANIME_ID + "=" + AnimeEntry._ID;
+                COLUMN_ANIME_ID + "=" + AnimeEntry.TABLE_NAME + "." + AnimeEntry._ID;
+//        public static final String WAIFU_INNER_ANIME = "SELECT "+ ALL_COLUMNS + " FROM " + TABLE_NAME + " INNER JOIN " +
+//                AnimeEntry.TABLE_NAME + " ON " +
+//                COLUMN_ANIME_ID + "=" + AnimeEntry._ID;
 
         // PROJECTION MAP from the columns of the db to a cursor
         public static HashMap<String, String> sWaifuInnerProjectionMap = new HashMap<>();

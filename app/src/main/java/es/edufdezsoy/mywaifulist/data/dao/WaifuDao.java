@@ -51,14 +51,18 @@ public class WaifuDao {
         SQLiteDatabase sqLiteDatabase = MyWaifuListOpenHelper.getInstance().openDatabase();
 
         SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
-        sqLiteQueryBuilder.setTables(MyWaifuListContract.WaifuInnerEntry.TABLE_NAME);
+        sqLiteQueryBuilder.setTables(MyWaifuListContract.WaifuInnerEntry.WAIFU_INNER_ANIME);
         sqLiteQueryBuilder.setProjectionMap(MyWaifuListContract.WaifuInnerEntry.sWaifuInnerProjectionMap);
+
+        Log.v(MyWaifuListApplication.TAG, MyWaifuListContract.WaifuInnerEntry.WAIFU_INNER_ANIME);
+
+        String selection = MyWaifuListContract.WaifuInnerEntry.TABLE_NAME + "." + MyWaifuListContract.WaifuInnerEntry._ID + "=?";
+        String[] selectionArgs = {Integer.toString(id)};
 
         Cursor cursor = sqLiteQueryBuilder.query(
                 sqLiteDatabase,
                 MyWaifuListContract.WaifuInnerEntry.ALL_COLUMNS,
-                (MyWaifuListContract.WaifuInnerEntry._ID + " = " + id), null, null, null,
-                MyWaifuListContract.WaifuInnerEntry.DEFAULT_SORT);
+                selection, selectionArgs, null, null, null);
 
         if (cursor.moveToFirst()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -69,7 +73,8 @@ public class WaifuDao {
                             cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_SURNAME)),
                             cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_NICKNAME)),
                             new Anime(
-                                    cursor.getInt(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_ANIME_ID)),
+                                    // cursor.getInt(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_ANIME_ID)),
+                                    cursor.getInt(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry._ID)),
                                     cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_ANIME_TITLE))
                             ),
                             dateFormat.parse(cursor.getString(cursor.getColumnIndex(MyWaifuListContract.WaifuInnerEntry.COLUMN_BIRTHDAY)))
