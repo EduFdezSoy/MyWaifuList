@@ -2,6 +2,7 @@ package es.edufdezsoy.mywaifulist.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.os.ConfigurationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class WaifuAdapter extends RecyclerView.Adapter<WaifuAdapter.ViewHolder> 
     public WaifuAdapter(Context context) {
         this.context = context;
         waifus = new ArrayList<>();
-        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat = new SimpleDateFormat("dd MMMM", ConfigurationCompat.getLocales(context.getResources().getConfiguration()).get(0));
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
@@ -58,7 +59,7 @@ public class WaifuAdapter extends RecyclerView.Adapter<WaifuAdapter.ViewHolder> 
             viewHolder.line2.setText(dateFormat.format(waifu.getBirthday()));
         } else {
             viewHolder.line1.setText(waifu.getNickname());
-            viewHolder.line2.setText(waifu.getName() + " " + waifu.getSurname() + " " + dateFormat.format(waifu.getBirthday()));
+            viewHolder.line2.setText(waifu.getName() + " " + waifu.getSurname() + ", " + dateFormat.format(waifu.getBirthday()));
         }
     }
 

@@ -1,6 +1,7 @@
 package es.edufdezsoy.mywaifulist.ui.waifuView;
 
 import android.os.Bundle;
+import android.support.v4.os.ConfigurationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ public class WaifuActivity extends AppCompatActivity implements WaifuContract.Vi
     private TextView name, surname, nickname, birthday, anime;
     private TextView nameTag, nicknameTag, birthdayTag, animeTag;
     private WaifuContract.Presenter presenter;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM", new Locale("es", "ES"));
+    SimpleDateFormat dateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class WaifuActivity extends AppCompatActivity implements WaifuContract.Vi
         setContentView(R.layout.activity_waifu_view);
 
         presenter = new WaifuPresenter(this);
+        dateFormat = new SimpleDateFormat("d MMMM", ConfigurationCompat.getLocales(getResources().getConfiguration()).get(0));
 
         image = findViewById(R.id.imageView);
         name = findViewById(R.id.textViewName);
